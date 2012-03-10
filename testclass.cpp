@@ -15,7 +15,7 @@ TestClass::TestClass(QObject *parent) :
 
      ImageViewer *image;
      image = new ImageViewer;
-     image->loadFromFile("Megan.jpg");
+     image->loadFromFile("megan.jpg");
      image->show();
 
 }
