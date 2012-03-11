@@ -13,9 +13,13 @@ public:
     explicit ImageViewer(QWidget *parent = 0);
 
     void loadFromFile(const QString& image);
+    void setNormalSize();
 
 protected:
-    void resizeEvent(QResizeEvent *);
+    void mouseDoubleClickEvent(QMouseEvent *);
+
+signals:
+    void clicked();
 
 private:
     void createImageLabel();

@@ -2,6 +2,7 @@
 #include <QHBoxLayout>
 #include <QImage>
 #include <QScrollArea>
+#include <QDebug>
 
 #include "imageviewer.h"
 
@@ -15,6 +16,7 @@ void ImageViewer::createImageLabel()
 {
     imageLabel = new QLabel;
     imageLabel->setBackgroundRole(QPalette::Base);
+    imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     imageLabel->setScaledContents(true);
     imageLabel->adjustSize();
 
@@ -35,7 +37,12 @@ void ImageViewer::loadFromFile(const QString &fileName)
     imageLabel->setPixmap(QPixmap::fromImage(image));
 }
 
-void ImageViewer::resizeEvent(QResizeEvent *)
+void ImageViewer::mouseDoubleClickEvent(QMouseEvent *)
 {
-    imageLabel->adjustSize();
+    emit clicked();
+}
+
+void ImageViewer::setNormalSize()
+{
+    resize(imageLabel->pixmap()->size());
 }

@@ -49,6 +49,7 @@ void AddPatientDialog::createTabs()
     examinationScrollArea->setWidget(examinationWidget);
     examinationScrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+
 //    tabWidget = new QTabWidget;
 //    tabWidget->addTab( personalDetailScrollArea, QString(tr("Dane osobowe")) );
 //    tabWidget->addTab( examinationScrollArea, QString( tr("Badania przedmiotowe") ));

@@ -61,7 +61,8 @@ SOURCES += \
     Database/databasepatient.cpp \
     testclass.cpp \
     Patients/patients.cpp \
-    Image/imageviewer.cpp
+    Image/imageviewer.cpp \
+    Image/cropimagewidget.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -123,7 +124,8 @@ HEADERS += \
     Database/databasepatient.h \
     testclass.h \
     Patients/patients.h \
-    Image/imageviewer.h
+    Image/imageviewer.h \
+    Image/cropimagewidget.h
 
 OTHER_FILES +=
 

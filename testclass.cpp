@@ -1,5 +1,6 @@
 #include "Database/databasepatient.h"
 #include "Image/imageviewer.h"
+#include "Image/cropimagewidget.h"
 #include <QList>
 #include <QMap>
 #include <QDebug>
@@ -13,9 +14,7 @@ TestClass::TestClass(QObject *parent) :
      PatientRecord rec = d.getPatientById("1");
      qDebug() << rec["name"];
 
-     ImageViewer *image;
-     image = new ImageViewer;
-     image->loadFromFile("megan.jpg");
+     CropImageWidget *image = new CropImageWidget;
      image->show();
 
 }
