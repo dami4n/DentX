@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class QLabel;
+class QScrollArea;
 
 class ImageViewer : public QWidget
 {
@@ -12,11 +13,15 @@ public:
     explicit ImageViewer(QWidget *parent = 0);
 
     void loadFromFile(const QString& image);
+
+protected:
+    void resizeEvent(QResizeEvent *);
+
 private:
     void createImageLabel();
 
     QLabel *imageLabel;
-
+    QScrollArea *scrollArea;
 
 };
 
