@@ -62,7 +62,8 @@ SOURCES += \
     testclass.cpp \
     Patients/patients.cpp \
     Image/imageviewer.cpp \
-    Image/cropimagewidget.cpp
+    Image/cropimagewidget.cpp \
+    Image/croplabel.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -125,7 +126,8 @@ HEADERS += \
     testclass.h \
     Patients/patients.h \
     Image/imageviewer.h \
-    Image/cropimagewidget.h
+    Image/cropimagewidget.h \
+    Image/croplabel.h
 
 OTHER_FILES +=
 

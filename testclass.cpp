@@ -4,6 +4,8 @@
 #include <QList>
 #include <QMap>
 #include <QDebug>
+#include "Image/croplabel.h"
+
 #include "testclass.h"
 
 TestClass::TestClass(QObject *parent) :
@@ -14,8 +16,10 @@ TestClass::TestClass(QObject *parent) :
      PatientRecord rec = d.getPatientById("1");
      qDebug() << rec["name"];
 
-     CropImageWidget *image = new CropImageWidget;
-     image->show();
+     CropLabel *cropLabel = new CropLabel;
+     QImage image("megan.jpg");
+     cropLabel->setPixmap(QPixmap::fromImage(image));
+     cropLabel->show();
 
 }
 

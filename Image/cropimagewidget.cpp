@@ -4,6 +4,7 @@
 #include <QPixmap>
 #include <QtGui>
 #include "imageviewer.h"
+#include "croplabel.h"
 
 #include "cropimagewidget.h"
 
@@ -31,8 +32,11 @@ void CropImageWidget::createLayout()
 
 void CropImageWidget::createImageViewer()
 {
-    imageViewer = new ImageViewer;
-    imageViewer->loadFromFile("megan.jpg");
+    //imageViewer = new ImageViewer;
+    //imageViewer->loadFromFile("megan.jpg");
+
+
+
 }
 
 void CropImageWidget::paintEvent(QPaintEvent *event)
@@ -46,15 +50,5 @@ void CropImageWidget::paintEvent(QPaintEvent *event)
 
 void CropImageWidget::paint()
 {
-    QPainter painter(&pixmap);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setBrush( Qt::white);
-    painter.drawRect( pixmap.rect() );
 
-    painter.setPen(Qt::black);
-
-    painter.setWindow( -50, -50, 100, 100);
-    painter.drawRect( -49,-49, 98, 98);
-
-    update();
 }
