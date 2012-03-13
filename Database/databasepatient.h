@@ -44,6 +44,23 @@ public:
      **/
     bool next();
 
+    /**
+     * Metoda dodaje pacjenta do bazy danych
+     * @param QMap<QString, QString>
+     * @return void
+     **/
+    int addPatient(QMap<QString, QString> patientMap);
+
+    /**
+     * Metoda aktualizuje dane pacjenta
+     * @param QMap<QString, QString>
+     * @return void
+     **/
+    int updatePatient(QMap<QString, QString> patientMap);
+
+signals:
+    void patientAdded();
+
 private:
      QSqlQuery *sqlQuery;
 

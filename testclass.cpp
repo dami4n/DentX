@@ -12,6 +12,9 @@ TestClass::TestClass(QObject *parent) :
     QObject(parent)
 {
      DatabasePatient d;
+     PatientRecord r = d.getPatientById("1");
+     r["name"] = "Michał";
+     d.updatePatient(r);
 
      PatientRecord rec = d.getPatientById("1");
      qDebug() << rec["name"];

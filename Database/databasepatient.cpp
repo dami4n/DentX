@@ -66,3 +66,84 @@ QMap<QString, QString> DatabasePatient::getPatientById(const QString& id) const
     return tmp;
 }
 
+int DatabasePatient::addPatient(QMap<QString, QString> patientMap)
+{
+    qDebug() << "Adding new patient...";
+
+    QString queryStart = "INSERT INTO patient (";
+    QString queryEnd = ") VALUES (";
+
+    QMapIterator<QString, QString> i(patientMap);
+    while (i.hasNext())
+    {
+        i.next();
+        if( i.hasNext() )
+        {
+            queryStart = queryStart % i.key() % ", " ;
+            queryEnd = queryEnd % ":" % i.key() % ", ";
+        }
+        else
+        {
+            queryStart = queryStart % i.key();
+            queryEnd = queryEnd % ":" % i.key();
+        }
+    }
+
+    QSqlQuery query;
+    query.prepare(queryStart % queryEnd % ");");
+    i.toFront();
+
+    while (i.hasNext())
+    {
+        i.next();
+        query.bindValue(i.key(), i.value());
+    }
+
+    bool value = query.exec();
+
+    if( !value )
+    {
+        qDebug() << query.lastQuery();
+        qDebug() << query.lastError();
+        return -1;
+    }
+
+    emit patientAdded();
+
+    return 0;
+}
+
+int DatabasePatient::updatePatient(QMap<QString, QString> patientMap)
+{
+    qDebug() << "Adding new patient...";
+
+    QString query = "UPDATE patient SET ";
+
+
+    QMapIterator<QString, QString> i(patientMap);
+    while (i.hasNext())
+    {
+        i.next();
+        if( i.hasNext() )
+            query = query % i.key() % "= '" % i.value() % "', ";
+        else
+            query = query % i.key() % "= '" % i.value() % "' ";
+    }
+
+    query = query % " WHERE id = '" % patientMap["id"] % "';";
+
+    qDebug() << query;
+
+    QSqlQuery q;
+    bool value = q.exec(query);
+
+    if( !value )
+    {
+        qDebug() << q.lastQuery();
+        qDebug() << q.lastError();
+        return -1;
+    }
+
+    return 0;
+}
+

@@ -11,7 +11,7 @@ CropLabel::CropLabel(QWidget *parent) :
     setBackgroundRole(QPalette::Base);
     setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     setScaledContents(true);
-    adjustSize();
+    //adjustSize();
 
 }
 
