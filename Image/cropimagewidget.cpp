@@ -1,7 +1,6 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QPainter>
-#include <QPixmap>
+#include <QToolBar>
 #include <QtGui>
 #include "imageviewer.h"
 #include "croplabel.h"
@@ -12,43 +11,49 @@ CropImageWidget::CropImageWidget(QWidget *parent) :
     QWidget(parent)
 {
     createImageViewer();
-
-    pixmap = QPixmap(size());
-
+    createToolBar();
     createLayout();
-
-    paint();
-
     setWindowTitle( tr("Utwórz miniature") );
 }
 
 void CropImageWidget::createLayout()
 {
+    QHBoxLayout *toolBarLayout = new QHBoxLayout;
+    toolBarLayout->addStretch();
+    toolBarLayout->addWidget(toolBar);
+    toolBarLayout->setMargin(0);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->addWidget(imageViewer);
+    mainLayout->addWidget(cropLabel);
+    mainLayout->addLayout(toolBarLayout);
+    mainLayout->setMargin(0);
+
 
     setLayout(mainLayout);
 }
 
 void CropImageWidget::createImageViewer()
 {
-    //imageViewer = new ImageViewer;
-    //imageViewer->loadFromFile("megan.jpg");
+    cropLabel = new CropLabel;
+    QImage image("xray.jpg");
+    resize(image.size());
 
-
-
+    cropLabel->setPixmap(QPixmap::fromImage(image));
 }
 
-void CropImageWidget::paintEvent(QPaintEvent *event)
+void CropImageWidget::createToolBar()
 {
-    QWidget::paintEvent(event);
+    okAction = new QAction( tr("&Akceptuj"), this);
+    okAction->setIcon(QIcon(":/icons/ok.png"));
+    okAction->setStatusTip(tr("Akceptuj kadrowanie"));
 
-    QPainter painter(this);
-    painter.drawPixmap(0,0, pixmap);
-    painter.setWindow( -50, -50, 100, 100);
-}
+    backAction = new QAction( tr("&Confij"), this);
+    backAction->setIcon(QIcon(":/icons/Cancel.png"));
 
-void CropImageWidget::paint()
-{
-
+    toolBar = new QToolBar;
+    toolBar->setIconSize(QSize(16,16));
+    toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    toolBar->setBackgroundRole(QPalette::Dark);
+    toolBar->addAction(backAction);
+    toolBar->addAction(okAction);
 }

@@ -16,10 +16,8 @@ TestClass::TestClass(QObject *parent) :
      PatientRecord rec = d.getPatientById("1");
      qDebug() << rec["name"];
 
-     CropLabel *cropLabel = new CropLabel;
-     QImage image("megan.jpg");
-     cropLabel->setPixmap(QPixmap::fromImage(image));
-     cropLabel->show();
+     CropImageWidget *image = new CropImageWidget;
+     image->show();
 
 }
 

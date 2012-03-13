@@ -63,7 +63,8 @@ SOURCES += \
     Patients/patients.cpp \
     Image/imageviewer.cpp \
     Image/cropimagewidget.cpp \
-    Image/croplabel.cpp
+    Image/croplabel.cpp \
+    Teeth/radiograph.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -127,7 +128,8 @@ HEADERS += \
     Patients/patients.h \
     Image/imageviewer.h \
     Image/cropimagewidget.h \
-    Image/croplabel.h
+    Image/croplabel.h \
+    Teeth/radiograph.h
 
 OTHER_FILES +=
 

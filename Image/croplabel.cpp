@@ -8,6 +8,11 @@ CropLabel::CropLabel(QWidget *parent) :
     QLabel(parent)
 {
     selected = false;
+    setBackgroundRole(QPalette::Base);
+    setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    setScaledContents(true);
+    adjustSize();
+
 }
 
 
@@ -38,8 +43,9 @@ void CropLabel::mouseMoveEvent(QMouseEvent *event)
 {
     if( selectionActive )
     {
-        selectionRect.setBottomRight( event->pos() );
-        repaint();
+       selectionRect.setBottomRight( event->pos() );
+       repaint();
+
     }
     else
     {

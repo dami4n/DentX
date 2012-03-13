@@ -7,6 +7,7 @@ class QTabWidget;
 class QTextEdit;
 class ColorButtons;
 class DescriptionWidget;
+class Radiograph;
 
 class ActionTabs : public QWidget
 {
@@ -26,11 +27,13 @@ private:
     void createDescriptionTab();
     void createDiagnosisTab();
     void createPlanTextEdit();
+    void createRadiograph();
     void createTabs();
 
     QTabWidget *tabWidget;
     QTextEdit *diagnosisTextEdit;
     QTextEdit *planTextEdit;
+    Radiograph *radiograph;
 
     DescriptionWidget *descriptionWidget;
 

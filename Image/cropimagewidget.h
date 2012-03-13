@@ -3,7 +3,9 @@
 
 #include <QWidget>
 
-class ImageViewer;
+class CropLabel;
+class QToolBar;
+class QAction;
 
 class CropImageWidget : public QWidget
 {
@@ -11,16 +13,16 @@ class CropImageWidget : public QWidget
 public:
     explicit CropImageWidget(QWidget *parent = 0);
 
-protected:
-    void paintEvent(QPaintEvent *);
 
 private:
     void createLayout();
+    void createToolBar();
     void createImageViewer();
-    void paint();
 
-    QPixmap pixmap;
-    ImageViewer *imageViewer;
+    CropLabel *cropLabel;
+    QToolBar *toolBar;
+    QAction *okAction;
+    QAction *backAction;
 
 };
 

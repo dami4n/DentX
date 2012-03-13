@@ -65,6 +65,8 @@ int main(int argc, char *argv[])
 }
 
 // dodać obsługe zdjęć pacjenta
+// dodać obsługe mail
+// oznaczanie na zdjęciach rentgenowskich
 
 
 /*

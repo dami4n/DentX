@@ -3,6 +3,7 @@
 #include <QTextEdit>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include "radiograph.h"
 #include "colorbuttons.h"
 #include "descriptionwidget.h"
 
@@ -15,6 +16,7 @@ ActionTabs::ActionTabs(QWidget *parent) :
     createDescriptionTab();
     createDiagnosisTab();
     createPlanTextEdit();
+    createRadiograph();
     createTabs();
 }
 
@@ -38,6 +40,11 @@ void ActionTabs::createPlanTextEdit()
     planTextEdit = new QTextEdit;
 }
 
+void ActionTabs::createRadiograph()
+{
+    radiograph = new Radiograph;
+}
+
 void ActionTabs::createTabs()
 {
     tabWidget = new QTabWidget;
@@ -46,6 +53,7 @@ void ActionTabs::createTabs()
     tabWidget->addTab(descriptionWidget, tr("Opis wizyty"));
     tabWidget->addTab(diagnosisTextEdit, tr("Rozpoznanie"));
     tabWidget->addTab(planTextEdit, tr("Plan leczenia"));
+    tabWidget->addTab(radiograph, tr("Zdjęcia"));
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(tabWidget);
