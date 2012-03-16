@@ -59,7 +59,13 @@ public:
       */
     QString getAddress() const;
     QMap<QString, QString> getPatientData() const;
+    void setMap(const QMap<QString, QString>& patientMap);
+    QString getValue(const QString& value) const;
+    QString insertValue(const QString& key, const QString& value);
 
     int id; /*!< ID pacjenta */
+
+private:
+    QMap<QString, QString> patientMap;
 };
 #endif // PATIENT_H

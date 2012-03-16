@@ -12,6 +12,8 @@
 DiagramDialog::DiagramDialog(int newId, QWidget *parent) :
     QDialog(parent)
 {
+    setModal(Qt::NonModal);
+
     diagram = new Diagram;
     diagramMilkTeeth = new DiagramMilkTeeth;
     diagramMilkTeeth->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

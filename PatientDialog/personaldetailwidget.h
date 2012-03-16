@@ -97,6 +97,7 @@ private:
 
     QLabel *idLabel;
     QLabel *nameLabel;
+    QLabel *secondNameLabel;
     QLabel *lastNameLabel;
     QLabel *cityLabel;
     QLabel *zipCodeLabel;
@@ -112,6 +113,7 @@ private:
 
     QLineEdit *idLineEdit;
     QLineEdit *nameLineEdit;
+    QLineEdit *secondNameLineEdit;
     QLineEdit *lastNameLineEdit;
     QLineEdit *cityLineEdit;
     QLineEdit *zipCodeLineEdit;

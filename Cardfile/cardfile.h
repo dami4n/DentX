@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QModelIndex>
 #include <QMap>
+#include "Database/databasepatient.h"
 
 #include "patient.h"
 
@@ -34,7 +35,7 @@ public:
      * @param Patient
      * @return int
      */
-    Patient getPatientById(int id);
+    PatientRecord getPatientById(int id);
 
     void setDynamicSearch(bool);
     void addPatient(Patient patient);

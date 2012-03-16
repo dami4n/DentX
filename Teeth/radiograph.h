@@ -12,6 +12,10 @@ public:
 signals:
 
 public slots:
+    void doubleClicked(const QModelIndex &index);
+
+private:
+    void showPhoto(const QString& fileName);
 
 };
 

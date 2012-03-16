@@ -15,6 +15,7 @@
 #include "PatientDialog/showpatientdialog.h"
 #include "cardfiletable.h"
 #include "Pdf/pdfcreator.h"
+#include "Database/databasepatient.h"
 
 #include "cardfile.h"
 
@@ -300,90 +301,20 @@ void CardFile::updateModel()
     updateColumnName();
 }
 
-Patient CardFile::getPatientById(int id)
+PatientRecord CardFile::getPatientById(int id)
 {
-    Patient patient;
+    PatientRecord patient;
 
-    model->setFilter("id = " + QString::number(id));
-    model->select();
-    QSqlRecord record = model->record(0);
-    // remove filter ??
-
-    searchClicked();
-
-    updateColumnName();
-    // if null ??
-    patient.id = record.value(0).toInt();
-    patient.name = record.value(1).toString();
-    patient.lastName = record.value(2).toString();
-    patient.PESEL = record.value(3).toString();
-    patient.city = record.value(4).toString();
-    patient.street = record.value(5).toString();
-    patient.house = record.value(6).toString();
-    patient.zipCode = record.value(7).toString();
-    patient.apartment = record.value(8).toString();
-    patient.address = record.value(9).toString();
-    patient.phone = record.value(10).toString();
-    patient.pharmaceuticals = record.value(11).toString();
-    patient.allergy = record.value(12).toString();
-    patient.disorders = record.value(13).toString();
-    patient.note = record.value(14).toString();
-    patient.registrationDate.toString() = record.value(15).toString();
-    patient.dentalArticulation = record.value(16).toString();
-    patient.joint = record.value(17).toString();
-    patient.exposure = record.value(18).toString();
-    patient.color = record.value(19).toString();
-    patient.efflorescencePre = record.value(20).toString();
-    patient.efflorescenceSec = record.value(21).toString();
-    patient.morfologicalChanges = record.value(22).toString();
-    patient.tongue = record.value(23).toString();
-    patient.morfologicalDisorder = record.value(24).toString();
-    patient.ohi = record.value(25).toString();
-    patient.pli = record.value(26).toString();
-    patient.api = record.value(27).toString();
-    patient.salivaS = record.value(28).toString();
-    patient.salivaNS = record.value(29).toString();
+    DatabasePatient d;
+    patient = d.getPatientById(QString::number(id));
 
     return patient;
 }
 
 void CardFile::editPatient(Patient patient)
 {
-      model->setFilter("id = " + QString::number(patient.id));
-      QSqlRecord record = model->record(0);
-
-      record.setValue( 1,  patient.name);
-      record.setValue( 2,  patient.lastName);
-      record.setValue( 3,  patient.PESEL);
-      record.setValue( 4,  patient.city);
-      record.setValue( 5,  patient.street);
-      record.setValue( 6,  patient.house);
-      record.setValue( 7,  patient.zipCode);
-      record.setValue( 8,  patient.apartment);
-      record.setValue( 9,  patient.getAddress());
-      record.setValue( 10, patient.phone);
-      record.setValue( 11, patient.pharmaceuticals);
-      record.setValue( 12, patient.allergy);
-      record.setValue( 13, patient.disorders);
-      record.setValue( 14, patient.note);
-      // record.setValue( 14, patient.registrationDate.toString()); /* daty nie zmieniamy */
-      record.setValue( 16, patient.dentalArticulation);
-      record.setValue( 17, patient.joint);
-      record.setValue( 18, patient.exposure);
-      record.setValue( 19, patient.color);
-      record.setValue( 20, patient.efflorescencePre);
-      record.setValue( 21, patient.efflorescenceSec);
-      record.setValue( 22, patient.morfologicalChanges);
-      record.setValue( 23, patient.tongue);
-      record.setValue( 24, patient.morfologicalDisorder);
-      record.setValue( 25, patient.ohi);
-      record.setValue( 26, patient.pli);
-      record.setValue( 27, patient.api);
-      record.setValue( 28, patient.salivaS);
-      record.setValue( 29, patient.salivaNS);
-
-      model->setRecord(0, record);
-      model->submitAll();
+      DatabasePatient d;
+      d.updatePatient(patient.getPatientData());
       model->setFilter("");
       model->select();
 
@@ -473,7 +404,7 @@ void CardFile::showPatient(int patientID, bool edit)
 {
     Patient newPatient;
 
-    newPatient = getPatientById( patientID );
+    newPatient.setMap(getPatientById( patientID ));
 
     ShowPatientDialog *showPatientDialog = new ShowPatientDialog;
     showPatientDialog->setPatient(newPatient);
@@ -512,7 +443,7 @@ void CardFile::generatePdf()
 
     if( row.size() > 0)
     {
-        patient = getPatientById( row.at(0).data(0).toInt() );
+        patient.setMap(getPatientById( row.at(0).data(0).toInt() ));
         pdf.createPatientPage(patient);
     }
 }

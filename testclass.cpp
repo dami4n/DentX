@@ -19,8 +19,8 @@ TestClass::TestClass(QObject *parent) :
      PatientRecord rec = d.getPatientById("1");
      qDebug() << rec["name"];
 
-     CropImageWidget *image = new CropImageWidget;
-     image->show();
+     ImageViewer *image = new ImageViewer("megan.jpg");
+     //image->show();
 
 }
 

@@ -168,6 +168,17 @@ void PersonalDetailWidget::createPersonalDetail()
     nameLayout->addWidget(nameLabel);
     nameLayout->addWidget(nameLineEdit);
 
+    // second name
+    secondNameLabel = new QLabel( tr("Drugie imię") );
+    secondNameLineEdit = new QLineEdit;
+    secondNameLabel->setBuddy(secondNameLineEdit);
+
+    secondNameLineEdit->setValidator(new QRegExpValidator(nameRegExp, this));
+
+    QVBoxLayout *secondNameLayout = new QVBoxLayout;
+    secondNameLayout->addWidget(secondNameLabel);
+    secondNameLayout->addWidget(secondNameLineEdit);
+
     // last name
     lastNameLabel = new QLabel( tr("Nazwisko") );
     lastNameLineEdit = new QLineEdit;
@@ -196,8 +207,8 @@ void PersonalDetailWidget::createPersonalDetail()
     // id, name, last name layout
     QGridLayout *idNameLastNameLayout = new QGridLayout;
     idNameLastNameLayout->addLayout(nameLayout, 0, 0);
-    idNameLastNameLayout->addLayout(lastNameLayout, 0 , 1);
-    idNameLastNameLayout->addLayout(idLayout, 1, 0);
+    idNameLastNameLayout->addLayout(secondNameLayout, 0 , 1);
+    idNameLastNameLayout->addLayout(lastNameLayout, 1, 0);
     idNameLastNameLayout->addLayout(peselLayout, 1, 1);
 
     personalDetailsGroupBox->setLayout(idNameLastNameLayout);
@@ -223,6 +234,7 @@ void PersonalDetailWidget::createGender()
 void PersonalDetailWidget::setEditable(bool value)
 {
     nameLineEdit->setEnabled( value );
+    secondNameLineEdit->setEnabled( value );
     lastNameLineEdit->setEnabled( value );
     cityLineEdit->setEnabled( value );
     apartmentNumberLineEdit->setEnabled( value );
@@ -239,7 +251,7 @@ void PersonalDetailWidget::setEditable(bool value)
 void PersonalDetailWidget::setPatient(Patient patient)
 {
     idLineEdit->setText( QString::number(patient.id) );
-
+    secondNameLineEdit->setText( patient.getValue("secondname"));
     nameLineEdit->setText( patient.name );
     lastNameLineEdit->setText( patient.lastName );
     cityLineEdit->setText( patient.city );

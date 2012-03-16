@@ -53,6 +53,54 @@ QMap<QString, QString> Patient::getPatientData() const
     map.insert("api", api); /*!< Współczynnik AI */
     map.insert("salivaS", salivaS); /*!< Ilość śliny stymulowanej */
     map.insert("salivaNS", salivaNS); /*!< Ilość śliny niestymulowanej */
+    map.insert("id", QString::number(id));
 
     return map;
+}
+
+void Patient::setMap(const QMap<QString, QString>& patientMap)
+{
+    name = patientMap["name"];
+    lastName = patientMap["lastname"];
+    PESEL = patientMap["pesel"];
+    city = patientMap["city"];
+    street= patientMap["street"];
+    house= patientMap["house"];
+    zipCode = patientMap["zipCode"];
+    apartment= patientMap["apartment"];
+    phone= patientMap["phone"];
+    address = patientMap["address"];
+    pharmaceuticals = patientMap["pharmaceuticals"];
+    allergy= patientMap["allergy"];
+    disorders = patientMap["disorders"];
+    note = patientMap["note"];
+    registrationDate= QDateTime::fromString(patientMap["registrationDate"]);
+    dentalArticulation= patientMap["dentalArticulation"];
+    joint = patientMap["joint"];
+    exposure = patientMap["exposure"];
+    color = patientMap["color"];
+    efflorescencePre= patientMap["efflorescencePre"];
+    efflorescenceSec= patientMap["efflorescenceSec"];
+    morfologicalChanges= patientMap["morfologicalChanges"];
+    tongue= patientMap["tongue"];
+    morfologicalDisorder= patientMap["morfologicalDisorder"];
+    ohi= patientMap["ohi"];
+    pli = patientMap["pli"];
+    api= patientMap["api"];
+    salivaS= patientMap["salivaS"];
+    salivaNS= patientMap["salivaNS"];
+    id = patientMap["id"].toInt();
+
+    getAddress();
+    this->patientMap = patientMap;
+}
+
+QString Patient::getValue(const QString &value) const
+{
+    return patientMap[value];
+}
+
+QString Patient::insertValue(const QString &key, const QString &value)
+{
+    patientMap.insert(key, value);
 }
